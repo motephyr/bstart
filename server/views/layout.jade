@@ -1,0 +1,187 @@
+html
+  head
+    title Gossim
+    meta(charset='UTF-8')
+    meta(content='width=device-width, initial-scale=1.0', name='viewport')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+    style(type='text/css').
+      body,html{
+      background: #f4f6fd url('/img/logbgimg.svg') bottom center no-repeat;
+        background-size: contain;
+      }
+      .mu-banner {
+      background-color: #E0ECF4;
+      z-index: 100;
+      height: 100%;
+      padding-top: 100px;
+      }
+      .mu-banner-appbar-height {
+      height: 56px;
+      }
+      .mu-banner-container {
+      margin-right: auto;
+      margin-left: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+      }
+      .mu-logo {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      background-color: #ffffff;
+      margin: 0 auto;
+      color: #03a9f4;
+      font-size: 50px;
+      border-radius: 50%;
+      margin-bottom: 16px;
+      }
+      .mu-banner-title {
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.87);
+      margin-top: 0;
+      margin-bottom: 16px;
+      text-align: center;
+      }
+      .mu-banner-sub-title {
+      color: rgba(255, 255, 255, 0.87);
+      text-align: center;
+      font-weight: 300;
+      margin-bottom: 16px;
+      }
+      .mu-banner-button {
+      color: #03a9f4;
+      }
+      .mu-banner-actions {
+      text-align: center;
+      }
+      .mu-desc-wrapper {
+      background-color: rgba(255, 255, 255, 0.3);
+      }
+      .mu-desc {
+      padding: 24px 24px 48px 24px;
+      max-width: 800px;
+      margin: auto;
+      }
+      .mu-desc-title {
+      font-weight: 400;
+      padding-left: 16px;
+      padding-right: 16px;
+      }
+      .mu-desc-sub-title {
+      font-weight: 400;
+      font-size: 18px;
+      }
+      .mu-desc-item {
+      padding-left: 16px;
+      padding-right: 16px;
+      }
+      .mu-desc-text {
+      font-size: 16px;
+      }
+      @media (min-width: 480px) {
+      .mu-banner-appbar-height {
+      height: 64px;
+      }
+      }
+      .mu-footer {
+      background-color: #212121;
+      text-align: center;
+      color: #ffffff;
+      padding: 50px 40px;
+      }
+      .fade-enter-active {
+      transition: opacity .5s;
+      }
+      .fade-leave-active {
+      display: none;
+      }
+      .fade-enter {
+      opacity: 0;
+      }
+      @-webkit-keyframes swinging {
+        0% { -webkit-transform: rotate(10deg); }
+        50% { -webkit-transform: rotate(-5deg) }
+        100% { -webkit-transform: rotate(10deg); }
+      }
+      @keyframes swinging {
+        0% { transform: rotate(10deg); }
+        50% { transform: rotate(-5deg) }
+        100% { transform: rotate(10deg); }
+      }
+      .swingimage {
+        position: relative;
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+        -webkit-animation: swinging 3.5s ease-in-out forwards infinite;
+        animation: swinging 3.5s ease-in-out forwards infinite;
+        margin: 0 auto;
+      }
+      .topTitle{
+        text-align: center;
+        padding: 30px 0;
+      }
+      .topTitle img{
+        margin: 12px auto;
+      }
+      .alignCenter{
+        text-align: center;
+      }
+      .loginPanel{
+        text-align: left;
+      }
+      .panel{
+        background-color: rgba(244, 246, 254, 0.76);
+        border: 0 solid rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      }
+      .panel-default > .panel-heading {
+        color: #333;
+        background-color: rgba(255, 255, 255, 0);
+        border-color: rgba(221, 221, 221, 0);
+      }
+      @media (min-width: 992px){
+        .col-md-offset-4 {
+          margin-left: 0;
+          width: 100%;
+        }
+        .swingimage{
+          width: 60%;
+        }
+      }
+      @media (min-width: 768px){
+        .col-sm-offset-3 {
+          width: 100%;
+        }
+        .swingimage {
+          width: 80%;
+        }
+      }
+      @media (max-width: 400px){
+        .topTitle {
+          padding: 0;
+        }
+        .lblogo {
+          width: 60%;
+        }
+        .topTitle img {
+          margin: 12px auto;
+        }
+        .swingimage {
+          width: 50%;
+          display: none;
+        }
+      }
+  body
+    #app
+      .container.bloc-lg
+        .row
+          .col-xs-12.col-md-8.col-md-offset-2
+            .topTitle
+              img.img-responsive.lazyload.lblogo(src='/img/logo.svg', data-src='/img/logo.svg')
+              img.img-responsive.lazyload(src='/img/ministry-of-education-text.svg', data-src='/img/ministry-of-education-text.svg')
+            .row
+              .col-sm-6.alignCenter
+                img.img-responsive.lazyload.swingimage(src='/img/bs-img.svg', data-src='/img/bs-img.svg')
+              .col-sm-6.loginPanel
+                block content
