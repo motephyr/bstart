@@ -30,7 +30,10 @@ module.exports = {
       // 项目中的 Sass 文件
       { src: '~/assets/scss/main.scss', lang: 'scss' } // 指定 scss 而非 sass
   ],
-  plugins: [{ src: '~/plugins/element-ui', ssr: true }],
+  plugins: [{ src: '~/plugins/element-ui', ssr: true },
+  {src: '~plugins/vue-cookie', ssr: false, injectAs: 'cookie'},
+  { src: '~/plugins/nuxt-client-init.js', ssr: false }
+],
   /* ** Add axios globally */
   build: {
     vendor: ['axios','element-ui','jquery'],

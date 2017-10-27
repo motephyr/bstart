@@ -41,6 +41,7 @@
     "postcss-responsive-type": "^1.0.0",
     "scss": "^0.2.4",
     "source-map-support": "^0.4.15",
+    "vue-cookie": "^1.1.4",
     "webpack": "^3.6.0"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import axios from '~/plugins/axios'
 import _ from 'lodash'
+import Vue from 'vue'
 
 export const state = () => ({
   authUser: null,
@@ -77,14 +78,26 @@ export const actions = {
       }
     }
   },
+  async nuxtClientInit({ commit }, { req }) {
+    if (Vue.cookie.get('place')) {
+      var place = Vue.cookie.get('place')
+      commit('SET_PLACE', place)
+    }
+    if (Vue.cookie.get('year')) {
+      var year = Vue.cookie.get('year')
+      commit('SET_YEAR', year)
+    }
+  },
   async getYearPlaceId ({ commit }, { place, year }) {
     var yearPlaceId = await axios.post('/api/year_places/getId', {place: place, year: year})
     commit('SET_YEAR_PLACE_ID', yearPlaceId.data.id)
   },
   setYear ({ commit }, { year }) {
+    Vue.cookie.set('year', year, 1)
     return commit('SET_YEAR', year)
   },
   setPlace ({ commit }, { place }) {
+    Vue.cookie.set('place', place, 1)
     return commit('SET_PLACE', place)
   },
 
