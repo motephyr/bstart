@@ -24,7 +24,7 @@
             </el-table>
           </el-tab-pane>
           <el-tab-pane :label="struct.sub_field" v-for="struct in structs" :key="struct.sub_field">
-            <el-tooltip class="item" effect="dark" content="刪除該經費項目" placement="left">
+            <el-tooltip class="item" effect="dark" content="刪除該經費項目" placement="left" v-if="$store.state.authUser.area === '中央'">
               <div @click="openTabName" class="dlThisYear icon-cancel"></div>
             </el-tooltip>
             <div>
