@@ -47,7 +47,7 @@
                       <input type="text" v-model="struct.value[ix][iy]" @keyup="inputChange"/>
                     </div>
                   </td>
-                  <td>{{struct.value[ix] | getSum}}</td>
+                  <td>{{struct.value | getSum(ix)}}</td>
                 </tr>
                 </tbody>
                 <tfoot>
@@ -116,10 +116,14 @@ export default {
     }
   },
   filters: {
-    getSum(array) {
-      var x = array[0] ? parseInt(array[0]) : 0
-      var y = array[1] ? parseInt(array[1]) : 0
-      return x + y
+    getSum(array, row) {
+      var sum = 0;
+      for (var i=0;i<=row;i++){
+        var x = array[i][0] ? parseInt(array[i][0]) : 0
+        var y = array[i][1] ? parseInt(array[i][1]) : 0
+        sum = sum + x + y
+      }
+      return sum
     }
   },
   methods: {
