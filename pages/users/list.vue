@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         <tr class="" v-for="user in users" @click="edit_user(user._id)" title="編輯帳號" :class="{ off: user.accountLocked }">
-          <td class="icon-checkmark3">{{user._id}}</td>
+          <td class="icon-checkmark3" :title="user._id"></td>
           <td>{{user.area}}</td>
           <td>{{user.account}}</td>
           <td>{{user.name}}</td>

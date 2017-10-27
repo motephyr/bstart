@@ -168,6 +168,20 @@ app.post('/gift_bag/upload/:y/:p',upload.single('xlsxUp'), function(req, res, ne
 });
 
 
+var uploadimg = multer({ dest: 'uploads/' });
+app.post('/upload',uploadimg.single('logos'), function(req, res, next){
+  console.log("年ppp:",upload);
+  console.log("年:",req.params.y);
+  console.log("地:",req.params.p);
+  // console.log('ddf',req.df );
+  var file = req.file;
+  console.log('文件类型：%s', file.mimetype);
+  console.log('原始文件名：%s', file.originalname);
+  console.log('文件大小：%s', file.size);
+  console.log('文件保存路径：%s', file.path);
+});
+
+
 
 // router.get('/export',(req,res,next)=>{
 //   //查询数据库

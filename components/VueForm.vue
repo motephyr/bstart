@@ -41,6 +41,7 @@
           <el-button :disabled="!isValid" class="button" type="submit" v-if="mode == 'edit'" @click="UpdateUser(newObj.id)">Edit {{model}}</el-button>
         </div> -->
       </form>
+      <div id="fff" @click="copy()">fsdf</div>
       <!-- <el-button class="button" @click="setMode('index')">返回</el-button> -->
     </div>
   </div>
@@ -310,6 +311,19 @@ export default {
       this.comFields.push({
         name: '__component:custom-actions'
       })
+    }
+  },
+  mounted: function (){
+    function copy(s) {
+      console.log(s);
+      $('#fff').append('<textarea id="clip_area"></textarea>');
+//        var clip_area = $('#clip_area');
+      $('#clip_area').text(s);
+      $('#clip_area').select();
+
+      document.execCommand('copy');
+
+      $('#clip_area').remove();
     }
   }
 }

@@ -50,11 +50,11 @@ var tableColumns = [
     name: 'mobile',
     type: 'string',
     title: '行動'
-  },
-  {
-    name: 'pwdResetToken',
-    type: 'string'
   }
+//  {
+//    name: 'pwdResetToken',
+//    type: 'string'
+//  }
 ]
 
 export default {

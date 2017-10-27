@@ -17,7 +17,7 @@
           </thead>
           <tbody>
           <tr v-for="(x, ix) in promotion_activities_1.xaxio" :key="x.id">
-            <td>{{x.value}}</td>
+            <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in promotion_activities_1.yaxio" :key="y.id">
               <div v-if="promotion_activities_1.value.length > ix && promotion_activities_1.value[ix]">
                 <el-input type="text" v-model="promotion_activities_1.value[ix][iy]" ></el-input>
@@ -41,7 +41,7 @@
           </thead>
           <tbody>
           <tr v-for="(x, ix) in promotion_activities_2.xaxio" :key="x.id">
-            <td>{{x.value}}</td>
+            <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in promotion_activities_2.yaxio" :key="y.id">
               <div v-if="promotion_activities_2.value.length > ix && promotion_activities_2.value[ix]">
                 <el-input type="text" v-model="promotion_activities_2.value[ix][iy]" ></el-input>
@@ -65,7 +65,7 @@
           </thead>
           <tbody>
           <tr v-for="(x, ix) in promotion_activities_3.xaxio" :key="x.id">
-            <td>{{x.value}}</td>
+            <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in promotion_activities_3.yaxio" :key="y.id">
               <div v-if="promotion_activities_3.value.length > ix && promotion_activities_3.value[ix]">
                 <el-input type="text" v-model="promotion_activities_3.value[ix][iy]" />

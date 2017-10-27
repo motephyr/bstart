@@ -15,7 +15,7 @@
                         <!--</el-tooltip>-->
                         <el-upload
                                 name="logos"
-                                action="../../upload"
+                                action="/upload"
                                 list-type="picture-card"
                                 :on-preview="handlePictureCardPreview"
                                 :on-remove="handleRemove">
@@ -26,11 +26,54 @@
                             <el-input type="text" v-model="dialogImageUrl"></el-input>
                         </el-dialog>
                     </el-tab-pane>
-                    <el-tab-pane label="青少年活動">青少年活動</el-tab-pane>
-                    <el-tab-pane label="樂齡活動">樂齡活動</el-tab-pane>
-                    <el-tab-pane label="多元文化活動">多元文化活動</el-tab-pane>
-                    <el-tab-pane label="原住民活動">原住民活動</el-tab-pane>
-                    <el-tab-pane label="其他活動">其他活動</el-tab-pane>
+                    <el-tab-pane label="青少年活動">
+                        <el-upload
+                                name="logos"
+                                action="../../upload"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                    </el-tab-pane>
+                    <el-tab-pane label="樂齡活動">
+                        <el-upload
+                                name="logos"
+                                action="/upload"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                    </el-tab-pane>
+                    <el-tab-pane label="多元文化活動">
+                        <el-upload
+                                name="logos"
+                                action="/upload"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload></el-tab-pane>
+                    <el-tab-pane label="原住民活動">
+                        <el-upload
+                                name="logos"
+                                action="/upload"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload></el-tab-pane>
+                    <el-tab-pane label="其他活動">
+                        <el-upload
+                                name="logos"
+                                action="/upload"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                    </el-tab-pane>
                 </el-tabs>
             </div>
         </div>
@@ -143,5 +186,8 @@ export default {
     .pd20{
       padding: 20px 0;
     }
+  }
+  .el-dialog__wrapper {
+      z-index: 3000 !important;
   }
 </style>
