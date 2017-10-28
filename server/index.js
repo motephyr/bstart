@@ -175,60 +175,10 @@ app.post('/upload',uploadimg.single('logos'), function(req, res, next){
   console.log("地:",req.params.p);
   // console.log('ddf',req.df );
   var file = req.file;
-  console.log('文件类型：%s', file.mimetype);
   console.log('原始文件名：%s', file.originalname);
   console.log('文件大小：%s', file.size);
   console.log('文件保存路径：%s', file.path);
 });
-
-
-
-// router.get('/export',(req,res,next)=>{
-//   //查询数据库
-//   let realPath = path.join(TMP_PATH, fileName);
-//   let writeStream = fs.createWriteStream(realPath);
-//   let bom = new Buffer('\xEF\xBB\xBF', 'binary');
-//   writeStream.write(bom);
-//   //写入数据内容
-//   writeStream.end();
-//   writeStream.on('finish', ()=> {
-//     res.download(realPath, outName, (err)=> {
-//       fs.unlink(realPath, (err2)=> {
-//         if (err2) {
-//           logger.error('删除文件失败,err=' + err);
-//         }
-//
-//       });
-//       if (err) {
-//         logger.error(err);
-//         res.status(404).end();
-//       }
-//
-//     });
-//   });
-// });
-
-
-// app.post('/upload', upload.single('logos'), function(req, res, next){
-//   res.send({ret_code: '0'});
-//   // file.path('/upload/asd');
-//   var file = req.file;
-//   console.log('文件类型：%s', file.mimetype);
-//   console.log('原始文件名：%s', file.originalname);
-//   console.log('文件大小：%s', file.size);
-//   console.log('文件保存路径：%s', file.path);
-// });
-
-
-// var upload = multer();
-// router.post('/gift_bag/file/upload', upload.fields([{name: 'logos', maxCount: 1}]),function(req,res,next){
-//   var inputFiles = req.files; //未传时为undefined
-//   //读取文件内容
-//   var content = inputFiles['inputFile'][0].buffer.toString();
-//
-// });
-
-
 
 
 app.get('/form', function(req, res, next){

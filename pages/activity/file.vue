@@ -27,6 +27,7 @@
       })
     },
     mounted: function () {
+      var self = this;
       var utl = {};
       utl.Binary = {
         fixdata(data) {
@@ -161,7 +162,6 @@
       const filterVal = {//<=====值转化
       };
       function impt(emt) {//<===导入
-        console.log("dsfdsfdf");
         utl.XLSX.onImport(emt, function () {
           var rt = utl.XLSX.getSheetsByIndex();//<===默认获取Sheet1
           // console.log(rt);
@@ -193,27 +193,12 @@
         /*
         *更多规则自己定义吧
         */
-        alert(JSON.stringify(tmp));
-//         window.open("data:text/html;charset=utf-8,"+JSON.stringify(tmp));
-        console.log(tmp);
-        console.log("data:text/html;charset=utf-8,"+JSON.stringify(tmp));
-
-//        axios("../../upload", {method: "POST", data: "data:text/html;charset=utf-8,"+JSON.stringify(tmp)});
-
-//        /* set up an async GET request with axios */
-//        axios("/upload", {method: "POST", data: tmp
-//        }).catch(function(err) {
-//          /*錯誤獲取數據 */
-//        }).then(function(res) {
-//          /* 解析，當它接收到該數據 */
-//          var data = new Uint8Array(res.data);
-//          var workbook = XLSX.read(data, {type: "array"});
-//          return workbook;
-//        }).catch(function(err) {
-//          /* 解析錯誤 */
-//        }).then(function(workbook) {
-//          /* 在這裡做工作手冊 */
-//        });
+        axios.post('/api/activity_docs', {
+          value: tmp,
+          yearPlaceId: self.$store.state.yearPlaceId
+        }).catch((e) => {
+          console.log(e)
+        })
 
         return tmp;
       }
