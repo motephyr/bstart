@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     add (name) {
-      axios.post('/api/table_field_xs/' + name, {xaxio_name: this.xaxio_name}).then((res) => {
+      axios.post('/api/table_field_xs/' + name, {xaxio_name: this.xaxio_name, year: this.$store.state.year}).then((res) => {
         this.$router.replace('/reading_activities?' + Math.random())
       }).catch((e) => {
         console.log(e)

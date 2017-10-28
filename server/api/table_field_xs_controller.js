@@ -12,7 +12,7 @@ router.post('/table_field_xs/:id', async function (req, res, next) {
 
   try {
     var table_field = (await TableField.forge().query((qb) => {
-      qb.where({field: req.params.id});
+      qb.where({field: req.params.id, year: req.body.year});
     }).fetch({withRelated: ['table_field_xs']})).toJSON();      
     
     var max_location = _.chain(table_field.table_field_xs).map((x) => {return x.location}).max().value()
