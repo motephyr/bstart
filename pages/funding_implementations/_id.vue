@@ -20,7 +20,11 @@
               <el-table-column fixed prop="local" label="縣市" width="100"></el-table-column>
               <el-table-column prop="RegularGoor" label="經常門" width="120"></el-table-column>
               <el-table-column prop="CapitalGate" label="資本門" width="120"></el-table-column>
-              <el-table-column prop="Subtotal" label="小計" width="120"></el-table-column>
+              <el-table-column label="小計" width="120">
+                <template scope="scope">
+                  {{ scope.row.RegularGoor + scope.row.CapitalGate  }}
+                </template>
+              </el-table-column>
             </el-table>
           </el-tab-pane>
           <el-tab-pane :label="struct.sub_field" v-for="struct in structs" :key="struct.sub_field">

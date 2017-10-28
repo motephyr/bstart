@@ -130,14 +130,22 @@ router.post('/table_fields/getSubField/all/:id', async function (req, res, next)
       return {year_place_id: z[0].year_place_id, value: sumArray}
     }).value()
 
-    var result = [];
-    for (var i = 0; i< value.length ; i++) {
-      var x = value[i]
-      var place = (await YearPlace.findById(x.year_place_id)).toJSON()
+    var ids = _.map(value, (x) => {return x.year_place_id})
+    var places = (await YearPlaces.forge().query((qb) => {
+      qb.where('id', 'in', ids);
+    }).fetch()).toJSON()
+    var result = _(value).map((x) => {
+      var place = _.find(places, function(o) { return o.id == x.year_place_id }); 
       console.log(place)
-      result.push({local: place.place, RegularGoor: x.value[0], CapitalGate: x.value[1]})
-    }
- 
+      return place ? {local: place.place, RegularGoor: x.value[0], CapitalGate: x.value[1]} : null
+    }).compact().value()
+    console.log(result)
+
+    // var result = _(places).map((x) => {return {local: x.place, RegularGoor: x.value}})
+
+//       result.push({local: place.place, RegularGoor: x.value[0], CapitalGate: x.value[1]})
+//  console.log(result)
+//  console.log('aaaa')
     res.status(200).json(result);
     
   } catch(e) {
