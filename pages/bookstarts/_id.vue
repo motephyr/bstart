@@ -197,18 +197,30 @@ export default {
 
     async getData () {
       try {
-        let bookstarts1 = await axios.get('/api/table_fields/' + 'bookstarts_1' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-        let bookstarts2 = await axios.get('/api/table_fields/' + 'bookstarts_2' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-        let bookstarts3 = await axios.get('/api/table_fields/' + 'bookstarts_3' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-
+        let bookstarts1
+        let bookstarts2
+        let bookstarts3
+        let bookstarts4
+        let bookstarts5
+        let bookstarts6
+        if (this.$store.state.place !== '中央'){
+          bookstarts1 = await axios.get('/api/table_fields/' + 'bookstarts_1' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          bookstarts2 = await axios.get('/api/table_fields/' + 'bookstarts_2' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          bookstarts3 = await axios.get('/api/table_fields/' + 'bookstarts_3' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          bookstarts4 = await axios.get('/api/table_fields/' + 'bookstarts_4' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          bookstarts5 = await axios.get('/api/table_fields/' + 'bookstarts_5' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          bookstarts6 = await axios.get('/api/table_fields/' + 'bookstarts_6' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+        } else {
+          bookstarts1 = await axios.get('/api/table_fields/all/' + 'bookstarts_1' + '?year='+ this.$store.state.year)
+          bookstarts2 = await axios.get('/api/table_fields/all/' + 'bookstarts_2' + '?year='+ this.$store.state.year)
+          bookstarts3 = await axios.get('/api/table_fields/all/' + 'bookstarts_3' + '?year='+ this.$store.state.year)
+          bookstarts4 = await axios.get('/api/table_fields/all/' + 'bookstarts_4' + '?year='+ this.$store.state.year)
+          bookstarts5 = await axios.get('/api/table_fields/all/' + 'bookstarts_5' + '?year='+ this.$store.state.year)
+          bookstarts6 = await axios.get('/api/table_fields/all/' + 'bookstarts_6' + '?year='+ this.$store.state.year)
+        }
         this.bookstarts_1 = bookstarts1.data
         this.bookstarts_2 = bookstarts2.data
         this.bookstarts_3 = bookstarts3.data
-
-        let bookstarts4 = await axios.get('/api/table_fields/' + 'bookstarts_4' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-        let bookstarts5 = await axios.get('/api/table_fields/' + 'bookstarts_5' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-        let bookstarts6 = await axios.get('/api/table_fields/' + 'bookstarts_6' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-
         this.bookstarts_4 = bookstarts4.data
         this.bookstarts_5 = bookstarts5.data
         this.bookstarts_6 = bookstarts6.data

@@ -115,7 +115,6 @@ export default {
         } else {
           readingActivities1 = await axios.get('/api/table_fields/all/' + 'reading_activities_1' + '?year='+ this.$store.state.year)
           readingActivities2 = await axios.get('/api/table_fields/all/' + 'reading_activities_2' + '?year='+ this.$store.state.year)
-          console.log(readingActivities1.data.xaxio[0])
         }
         this.reading_activities_1 = readingActivities1.data
         this.reading_activities_2 = readingActivities2.data

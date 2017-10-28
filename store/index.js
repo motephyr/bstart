@@ -68,9 +68,6 @@ export const actions = {
           years: years
         })
         commit('SET_YEAR', years[years.length -1])
-
-        var yearPlaceId = await axios.post('/api/year_places/getId', {place: res.data.area, year: years[years.length -1]})
-        commit('SET_YEAR_PLACE_ID', yearPlaceId.data.id)
       } catch (error) {
         if (error.response.status === 401) {
           throw new Error('Bad credentials')
@@ -78,15 +75,17 @@ export const actions = {
       }
     }
   },
-  async nuxtClientInit({ commit }, { req }) {
+  async nuxtClientInit({ commit, state }, { req }) {
+    var place = Vue.cookie.get('place') || state.place
     if (Vue.cookie.get('place')) {
-      var place = Vue.cookie.get('place')
       commit('SET_PLACE', place)
     }
     if (Vue.cookie.get('year')) {
-      var year = Vue.cookie.get('year')
+      var year = Vue.cookie.get('year') || state.year
       commit('SET_YEAR', year)
     }
+    var yearPlaceId = await axios.post('/api/year_places/getId', {place: place, year: year})
+    commit('SET_YEAR_PLACE_ID', yearPlaceId.data.id)
   },
   async getYearPlaceId ({ commit }, { place, year }) {
     var yearPlaceId = await axios.post('/api/year_places/getId', {place: place, year: year})

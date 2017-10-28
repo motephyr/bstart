@@ -32,12 +32,11 @@
 </template>
 
 <script>
-import HeaderA from '~/components/header.vue'
 import LeftSide from '~/components/LeftSide.vue'
 import MyFooter from '~/components/Footer.vue'
 export default {
   components: {
-    HeaderA,LeftSide,MyFooter
+    LeftSide,MyFooter
   },
   middleware: 'auth',
   methods: {
