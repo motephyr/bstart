@@ -30,7 +30,7 @@
             <td>{{x.value}}</td>
             <td v-for="(y, iy) in bookstarts_1.yaxio" :key="y.id">
               <div v-if="bookstarts_1.value.length > ix && bookstarts_1.value[ix]">
-                <input type="text" v-model="bookstarts_1.value[ix][iy]" @keyup="inputChange"/>
+                <input type="text" v-model="bookstarts_1.value[ix][iy]" @keyup="inputChange" :disabled="isAdmin"/>
               </div>
             </td>
           </tr>
@@ -151,7 +151,8 @@ export default {
       bookstarts_4: {},
       bookstarts_5: {},
       bookstarts_6: {},
-      vuexData: this.$store.state
+      vuexData: this.$store.state,
+      isAdmin: (this.$store.state.place === '中央')
     }
   },
   watch: {
