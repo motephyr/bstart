@@ -57,7 +57,7 @@
           <!--</colgroup>-->
           <thead>
           <tr>
-            <th></th>
+            <th>館員志工培訓活動</th>
             <th v-for="y in promotion_activities_3.yaxio" :key="y.id">{{y.value}}</th>
           </tr>
           </thead>
@@ -67,6 +67,29 @@
             <td v-for="(y, iy) in promotion_activities_3.yaxio" :key="y.id">
               <div v-if="promotion_activities_3.value.length > ix && promotion_activities_3.value[ix]">
                 <el-input type="text" v-model="promotion_activities_3.value[ix][iy]" />
+              </div>
+            </td>
+            <td>{{x.description}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <table class="gTable sminputW80">
+          <!--<colgroup>-->
+            <!--<col style="background-color:red">-->
+          <!--</colgroup>-->
+          <thead>
+          <tr>
+            <th>閱讀活動</th>
+            <th v-for="y in promotion_activities_4.yaxio" :key="y.id">{{y.value}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="(x, ix) in promotion_activities_4.xaxio" :key="x.id">
+            <td width="128">{{x.value}}</td>
+            <td v-for="(y, iy) in promotion_activities_4.yaxio" :key="y.id">
+              <div v-if="promotion_activities_4.value.length > ix && promotion_activities_4.value[ix]">
+                <el-input type="text" v-model="promotion_activities_4.value[ix][iy]" />
               </div>
             </td>
             <td>{{x.description}}</td>
@@ -103,6 +126,7 @@ export default {
       },
       promotion_activities_2: {},
       promotion_activities_3: {},
+      promotion_activities_4: {},
       promotion_activities_edit: {},
       vuexData: this.$store.state,
       isAdmin: (this.$store.state.authUser.area === '中央')
@@ -154,18 +178,23 @@ export default {
         let promotionActivities1
         let promotionActivities2
         let promotionActivities3
+        let promotionActivities4
+
         if (this.$store.state.place !== '中央'){
           promotionActivities1 = await axios.get('/api/table_fields/' + 'promotion_activities_1' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
           promotionActivities2 = await axios.get('/api/table_fields/' + 'promotion_activities_2' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
           promotionActivities3 = await axios.get('/api/table_fields/' + 'promotion_activities_3' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          promotionActivities4 = await axios.get('/api/table_fields/' + 'promotion_activities_4' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
         } else {
           promotionActivities1 = await axios.get('/api/table_fields/all/' + 'promotion_activities_1' + '?year='+ this.$store.state.year)
           promotionActivities2 = await axios.get('/api/table_fields/all/' + 'promotion_activities_2' + '?year='+ this.$store.state.year)
           promotionActivities3 = await axios.get('/api/table_fields/all/' + 'promotion_activities_3' + '?year='+ this.$store.state.year)
+          promotionActivities4 = await axios.get('/api/table_fields/all/' + 'promotion_activities_4' + '?year='+ this.$store.state.year)
         }
         this.promotion_activities_1 = promotionActivities1.data
         this.promotion_activities_2 = promotionActivities2.data
         this.promotion_activities_3 = promotionActivities3.data
+        this.promotion_activities_4 = promotionActivities4.data
 
         this.promotion_activities_edit = promotionActivitiesEdit.data
       } catch (e) {

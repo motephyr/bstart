@@ -105,6 +105,9 @@ router.post('/year_places', async function (req, res, next) {
     var tableFieldId5 = await knex('table_fields').returning('id').insert(
       {year: nowYear, field: 'promotion_activities_3'}
     )
+    var tableFieldId5_2 = await knex('table_fields').returning('id').insert(
+      {year: nowYear, field: 'promotion_activities_4'}
+    )
     var tableFieldId6 = await knex('table_fields').returning('id').insert(
       {year: nowYear, field: 'funding_implementations', sub_field: '多元閱讀'}
     )
@@ -154,10 +157,16 @@ router.post('/year_places', async function (req, res, next) {
         {table_field_id: tableFieldId4[0], location: 3, value: '其他'},
       ])
       await knex('table_field_xs').insert([
-        {table_field_id: tableFieldId5[0], location: 0, value: '閩南語培訓'},
-        {table_field_id: tableFieldId5[0], location: 1, value: '客家語培訓'},
-        {table_field_id: tableFieldId5[0], location: 2, value: '原住民族語培訓'},
-        {table_field_id: tableFieldId5[0], location: 3, value: '其他語言培訓'},
+        {table_field_id: tableFieldId5[0], location: 0, value: '閩南語'},
+        {table_field_id: tableFieldId5[0], location: 1, value: '客家語'},
+        {table_field_id: tableFieldId5[0], location: 2, value: '原住民族語'},
+        {table_field_id: tableFieldId5[0], location: 3, value: '其他語言'},
+      ])
+      await knex('table_field_xs').insert([
+        {table_field_id: tableFieldId5_2[0], location: 0, value: '閩南語'},
+        {table_field_id: tableFieldId5_2[0], location: 1, value: '客家語'},
+        {table_field_id: tableFieldId5_2[0], location: 2, value: '原住民族語'},
+        {table_field_id: tableFieldId5_2[0], location: 3, value: '其他語言'},
       ])
   
       var pp = []
@@ -210,6 +219,10 @@ router.post('/year_places', async function (req, res, next) {
       await knex('table_field_ys').insert([
         {table_field_id: tableFieldId5[0], location: 0, value: '辦理場次'},
         {table_field_id: tableFieldId5[0], location: 1, value: '參與人次'}
+      ])
+      await knex('table_field_ys').insert([
+        {table_field_id: tableFieldId5_2[0], location: 0, value: '辦理場次'},
+        {table_field_id: tableFieldId5_2[0], location: 1, value: '參與人次'}
       ])
       await knex('table_field_ys').insert([
         {table_field_id: tableFieldId6[0], location: 0, value: '經常門'},
