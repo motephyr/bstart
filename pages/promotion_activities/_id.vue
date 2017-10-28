@@ -27,7 +27,6 @@
           </tr>
           </tbody>
         </table>
-        <el-button @click="update_data('promotion_activities_1')">Update</el-button>
 
         <table class="gTable sminputW80">
           <!--<colgroup>-->
@@ -51,7 +50,6 @@
           </tr>
           </tbody>
         </table>
-        <el-button @click="update_data('promotion_activities_2')">Update</el-button>
 
         <table class="gTable sminputW80">
           <!--<colgroup>-->
@@ -75,22 +73,27 @@
           </tr>
           </tbody>
         </table>
-        <el-button @click="update_data('promotion_activities_3')">Update</el-button>
 
-        <nuxt-link to="/">Back to the home page</nuxt-link>
+        <edit :promotion_activities_edit="promotion_activities_edit" v-if="isAdmin" />
+        
       </div>
     </div>
     <div id="footerBar">
       <!--<nuxt-link class="ftBt" to="/"><i class="icon-chevron-thin-left"></i> 返回</nuxt-link>-->
-      <div class="ftBt"  @click="addYear()"><i class="icon-checkmark5"></i>儲存</div>
+      <div class="ftBt"  @click="update_data()"><i class="icon-checkmark5"></i>儲存</div>
     </div>
   </div>
 </template>
 
 <script>
+import Edit from './edit.vue'
+
 import axios from '~/plugins/axios'
 import _ from 'lodash'
 export default {
+  components: {
+    Edit
+  },
   data () {
     return {
       promotion_activities_1: {
@@ -101,36 +104,65 @@ export default {
       promotion_activities_2: {},
       promotion_activities_3: {},
       promotion_activities_edit: {},
-      vuexData: this.$store.state
+      vuexData: this.$store.state,
+      isAdmin: (this.$store.state.authUser.area === '中央')
     }
   },
   watch: {
-    'vuexData.yearPlaceId': {
+    'vuexData.year': {
+      handler: function(newValue, oldValue) { // 可以获取新值与老值两个参数
+        this.getData()
+      }
+    },
+    'vuexData.place': {
       handler: function(newValue, oldValue) { // 可以获取新值与老值两个参数
         this.getData()
       }
     }
   },
   methods: {
-    update_data (name) {
-      var changeValue = _(this[name].xaxio).map((x, i) => {
-        x.table_values = this[name].value[i]
-        return x
-      }).value()
-      console.log(changeValue)
-      axios.post('/api/table_values/' + name, {change_value: changeValue, yearPlaceId: this.$store.state.yearPlaceId}).then((res) => {
-        this.$router.replace('/promotion_activities?' + Math.random())
-      }).catch((e) => {
-        console.log(e)
-      })
+    async update_data() {
+      var msg
+      var updateArray = ['promotion_activities_1', 'promotion_activities_2', 'promotion_activities_3']
+      var self = this
+      var all = function () {
+        for (var i = 0; i < updateArray.length; i++) {
+          var name = updateArray[i]
+          var changeValue = _(self[name].xaxio).map((x, i) => {
+            x.table_values = self[name].value[i]
+            return x
+          }).value()
+          axios.post('/api/table_values/' + name, {
+            change_value: changeValue,
+            yearPlaceId: self.$store.state.yearPlaceId
+          }).catch((e) => {
+            console.log(e)
+          })
+        }
+      }
+      await all()
+      this.$notify({
+        title: '已更新',
+        message: msg,
+        type: 'success'
+      });
     },
     async getData () {
       try {
         let promotionActivitiesEdit = await axios.get('/api/table_fields/' + 'promotion_activities_2' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId +'&action=edit')
-        let promotionActivities1 = await axios.get('/api/table_fields/' + 'promotion_activities_1' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-        let promotionActivities2 = await axios.get('/api/table_fields/' + 'promotion_activities_2' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
-        let promotionActivities3 = await axios.get('/api/table_fields/' + 'promotion_activities_3' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
 
+        let promotionActivities1
+        let promotionActivities2
+        let promotionActivities3
+        if (this.$store.state.place !== '中央'){
+          promotionActivities1 = await axios.get('/api/table_fields/' + 'promotion_activities_1' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          promotionActivities2 = await axios.get('/api/table_fields/' + 'promotion_activities_2' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+          promotionActivities3 = await axios.get('/api/table_fields/' + 'promotion_activities_3' + '?year='+ this.$store.state.year + '&yearPlaceId=' + this.$store.state.yearPlaceId)
+        } else {
+          promotionActivities1 = await axios.get('/api/table_fields/all/' + 'promotion_activities_1' + '?year='+ this.$store.state.year)
+          promotionActivities2 = await axios.get('/api/table_fields/all/' + 'promotion_activities_2' + '?year='+ this.$store.state.year)
+          promotionActivities3 = await axios.get('/api/table_fields/all/' + 'promotion_activities_3' + '?year='+ this.$store.state.year)
+        }
         this.promotion_activities_1 = promotionActivities1.data
         this.promotion_activities_2 = promotionActivities2.data
         this.promotion_activities_3 = promotionActivities3.data

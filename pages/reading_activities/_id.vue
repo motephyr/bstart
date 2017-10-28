@@ -81,7 +81,12 @@ export default {
     }
   },
   watch: {
-    'vuexData.yearPlaceId': {
+    'vuexData.year': {
+      handler: function(newValue, oldValue) { // 可以获取新值与老值两个参数
+        this.getData()
+      }
+    },
+    'vuexData.place': {
       handler: function(newValue, oldValue) { // 可以获取新值与老值两个参数
         this.getData()
       }
