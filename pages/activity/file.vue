@@ -17,17 +17,32 @@
   export default {
     data() {
       return {
+        vuexData: this.$store.state
       };
     },
+    watch: {
+      'vuexData.yearPlaceId': {
+        handler: function(newValue, oldValue) { // 可以获取新值与老值两个参数
+          this.getData()
+        }
+      }
+    },
     methods: {
+      async getData() {
+        var result = await axios.get('/api/activity_docs/' + this.$store.state.yearPlaceId)
+        if (result.data.value) {
+          alert(JSON.stringify(result.data.value))
+        }
+      }
     },
     created () {
       this.$store.dispatch('setIsTitle', {
         is_title: "活動表件"
       })
     },
-    mounted: function () {
+    mounted: async function () {
       var self = this;
+      this.getData()
       var utl = {};
       utl.Binary = {
         fixdata(data) {
