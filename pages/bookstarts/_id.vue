@@ -177,13 +177,11 @@ export default {
             x.table_values = self[name].value[i]
             return x
           }).value()
-//          console.log(changeValue)
-//          msg = changeValue
           axios.post('/api/table_values/' + name, {
             change_value: changeValue,
             yearPlaceId: self.$store.state.yearPlaceId
           }).catch((e) => {
-//            console.log(e)
+            console.log(e)
           })
         }
       }

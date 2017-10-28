@@ -26,7 +26,6 @@
           </tr>
           </tbody>
         </table>
-        <button @click="update_data('reading_activities_1')">Update</button>
         <table class="gTable sminputW80">
           <!--<colgroup>-->
             <!--<col style="background-color:red">-->
@@ -48,7 +47,6 @@
           </tr>
           </tbody>
         </table>
-            <button @click="update_data('reading_activities_2')">Update</button>
 
         <!--<nuxt-link to="/">Back to the home page</nuxt-link>-->
         <edit :reading_activities_edit="reading_activities_edit" />
@@ -56,7 +54,7 @@
     </div>
     <div id="footerBar">
       <!--<nuxt-link class="ftBt" to="/"><i class="icon-reply"></i> 返回</nuxt-link>-->
-      <div class="ftBt"  @click="addYear()"><i class="icon-checkmark5"></i>儲存</div>
+      <div class="ftBt"  @click="update_data()"><i class="icon-checkmark5"></i>儲存</div>
     </div>
   </div>
 </template>
@@ -89,18 +87,32 @@ export default {
     }
   },
   methods: {
-    update_data (name) {
-      console.log(this[name].xaxio[0])
-      var changeValue = _(this[name].xaxio).map((x, i) => {
-        x.table_values = this[name].value[i]
-        return x
-      }).value()
-//      console.log(changeValue)
-//      axios.post('/api/table_values/' + name, {change_value: changeValue, yearPlaceId: this.$store.state.yearPlaceId}).then((res) => {
-//        this.$router.replace('/reading_activities?' + Math.random())
-//      }).catch((e) => {
-//        console.log(e)
-//      })
+    async update_data() {
+      var msg
+      var updateArray = ['reading_activities_1', 'reading_activities_2']
+      var self = this
+      var all = function () {
+        for (var i = 0; i < updateArray.length; i++) {
+          var name = updateArray[i]
+          var changeValue = _(self[name].xaxio).map((x, i) => {
+            x.table_values = self[name].value[i]
+            return x
+          }).value()
+          axios.post('/api/table_values/' + name, {
+            change_value: changeValue,
+            yearPlaceId: self.$store.state.yearPlaceId
+          }).catch((e) => {
+            console.log(e)
+          })
+        }
+      }
+      await all()
+      this.$notify({
+        title: '已更新',
+        message: msg,
+        type: 'success'
+      });
+//      this.$router.replace('/promotion_activities?' + Math.random())
     },
     async getData () {
       try {
