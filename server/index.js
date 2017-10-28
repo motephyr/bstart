@@ -144,28 +144,14 @@ app.use('/api', api)
 // });
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, req.url);
-    // console.log(req.url);
+  destination: function(req, file, cb) {
+    cb(null, './uploads')
   },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now());
-    // console.log('sd');
+  filename: function(req, file, cb) {
+    cb(null, req.body.year + '-' + Date.now() + '-' + file.originalname)
   }
-});
+})
 var upload = multer({ storage: storage });
-// var upload = multer({ dest: 'uploads/' });
-app.post('/gift_bag/upload/:y/:p',upload.single('xlsxUp'), function(req, res, next){
-  console.log("年ppp:",upload);
-  console.log("年:",req.params.y);
-  console.log("地:",req.params.p);
-  // console.log('ddf',req.df );
-  var file = req.file;
-  console.log('文件类型：%s', file.mimetype);
-  console.log('原始文件名：%s', file.originalname);
-  console.log('文件大小：%s', file.size);
-  console.log('文件保存路径：%s', file.path);
-});
 
 
 var uploadimg = multer({ dest: 'uploads/' });
@@ -185,6 +171,7 @@ app.get('/form', function(req, res, next){
   var form = fs.readFileSync('./form.html', {encoding: 'utf8'});
   res.send(form);
 });
+app.use('/uploads', express.static('uploads'))
 
 
 // Import and Set Nuxt.js options
@@ -202,7 +189,6 @@ if (config.dev) {
 
 // Give nuxt middleware to express
 app.use(nuxt.render)
-
 // Listen the server
 app.listen(port, host)
 

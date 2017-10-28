@@ -7,8 +7,9 @@
                             name="xlsxUp"
                             class="upload-demo"
                             drag
-                            :action=action
+                            :action="action"
                             list-type=""
+                            :data="upload_data"
                             multiple>
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">將文件拖到此處<br><br>或<em>點擊上傳</em></div>
@@ -17,8 +18,8 @@
                 </div>
             </div>
         </div>
-        <div id="footerBar">
-            <div class="ftBt"><i class="icon-download3"></i> 下載</div>
+        <div id="footerBar" v-if="file_name">
+            <div class="ftBt"><i class="icon-download3" @click="download"></i> 下載</div>
         </div>
     </div>
 </template>
@@ -28,8 +29,22 @@
   export default {
     data() {
       return {
-        action: '/gift_bag/upload/' + this.$store.state.year + '/' + this.$store.state.place
+        action: '/api/send_activities/upload',
+        upload_data: {
+          year: this.$store.state.year,
+          place: this.$store.state.place,
+          yearPlaceId: this.$store.state.yearPlaceId
+        },
+        file_name: null,
+        vuexData: this.$store.state
       };
+    },
+    watch: {
+      'vuexData.yearPlaceId': {
+        handler: function(newValue, oldValue) { // 可以获取新值与老值两个参数
+          this.getData()
+        }
+      }
     },
     created () {
       this.$store.dispatch('setIsTitle', {
@@ -42,17 +57,21 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      async getData() {
+        var result = await axios.get('/api/send_activities/' + this.$store.state.yearPlaceId)
+        if (result.data.file_name) {
+          this.file_name = result.data.file_name
+        } else {
+          this.file_name = null
+        }
+      },
+      download () {
+        window.open('/'+this.file_name)
       }
     },
     mounted: function () {
-//      var y = this.$store.state.year;
-//      var p = this.$store.state.place;
-//      axios.get("file/"+y+"/"+p).then(function (res) {
-//        console.log(res.df);
-//        var pd = "sadasd"
-//      }).catch(function (error) {
-//        console.log(error);
-//      })
+        this.getData()
     }
   }
 </script>

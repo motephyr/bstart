@@ -16,3 +16,4 @@ build
 database.json
 knexfile.js
 secrets.js
+/uploads
