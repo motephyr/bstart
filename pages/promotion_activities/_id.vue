@@ -20,7 +20,7 @@
             <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in promotion_activities_1.yaxio" :key="y.id">
               <div v-if="promotion_activities_1.value.length > ix && promotion_activities_1.value[ix]">
-                <el-input type="text" v-model="promotion_activities_1.value[ix][iy]" ></el-input>
+                <el-input type="text" v-model="promotion_activities_1.value[ix][iy]" :disabled="isAdmin"></el-input>
               </div>
             </td>
             <td>{{x.description}}</td>
@@ -43,7 +43,7 @@
             <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in promotion_activities_2.yaxio" :key="y.id">
               <div v-if="promotion_activities_2.value.length > ix && promotion_activities_2.value[ix]">
-                <el-input type="text" v-model="promotion_activities_2.value[ix][iy]" ></el-input>
+                <el-input type="text" v-model="promotion_activities_2.value[ix][iy]" :disabled="isAdmin"></el-input>
               </div>
             </td>
             <td>{{x.description}}</td>
@@ -66,7 +66,7 @@
             <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in promotion_activities_3.yaxio" :key="y.id">
               <div v-if="promotion_activities_3.value.length > ix && promotion_activities_3.value[ix]">
-                <el-input type="text" v-model="promotion_activities_3.value[ix][iy]" />
+                <el-input type="text" v-model="promotion_activities_3.value[ix][iy]" :disabled="isAdmin" />
               </div>
             </td>
             <td>{{x.description}}</td>
@@ -89,7 +89,7 @@
             <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in promotion_activities_4.yaxio" :key="y.id">
               <div v-if="promotion_activities_4.value.length > ix && promotion_activities_4.value[ix]">
-                <el-input type="text" v-model="promotion_activities_4.value[ix][iy]" />
+                <el-input type="text" v-model="promotion_activities_4.value[ix][iy]" :disabled="isAdmin" />
               </div>
             </td>
             <td>{{x.description}}</td>

@@ -48,7 +48,7 @@
             <td>{{x.value}}</td>
             <td v-for="(y, iy) in bookstarts_2.yaxio" :key="y.id">
               <div v-if="bookstarts_2.value.length > ix && bookstarts_2.value[ix]">
-                <input type="text" v-model="bookstarts_2.value[ix][iy]" @keyup="inputChange" />
+                <input type="text" v-model="bookstarts_2.value[ix][iy]" @keyup="inputChange" :disabled="isAdmin"/>
               </div>
             </td>
           </tr>
@@ -66,7 +66,7 @@
             <td width="320">{{x.value}}</td>
             <td v-for="(y, iy) in bookstarts_3.yaxio" :key="y.id">
               <div v-if="bookstarts_3.value.length > ix && bookstarts_3.value[ix]">
-                <input type="text" v-model="bookstarts_3.value[ix][iy]" @keyup="inputChange"/>
+                <input type="text" v-model="bookstarts_3.value[ix][iy]" @keyup="inputChange" :disabled="isAdmin"/>
               </div>
             </td>
           </tr>
@@ -84,7 +84,7 @@
             <td width="320">{{x.value}}</td>
             <td v-for="(y, iy) in bookstarts_4.yaxio" :key="y.id">
               <div v-if="bookstarts_4.value.length > ix && bookstarts_4.value[ix]">
-                <input type="text" v-model="bookstarts_4.value[ix][iy]" @keyup="inputChange"/>
+                <input type="text" v-model="bookstarts_4.value[ix][iy]" @keyup="inputChange" :disabled="isAdmin"/>
               </div>
             </td>
           </tr>
@@ -102,7 +102,7 @@
             <td width="320">{{x.value}}</td>
             <td v-for="(y, iy) in bookstarts_5.yaxio" :key="y.id">
               <div v-if="bookstarts_5.value.length > ix && bookstarts_5.value[ix]">
-                <input type="text" v-model="bookstarts_5.value[ix][iy]" @keyup="inputChange"/>
+                <input type="text" v-model="bookstarts_5.value[ix][iy]" @keyup="inputChange" :disabled="isAdmin"/>
               </div>
             </td>
           </tr>
@@ -120,7 +120,7 @@
             <td width="320">{{x.value}}</td>
             <td v-for="(y, iy) in bookstarts_6.yaxio" :key="y.id">
               <div v-if="bookstarts_6.value.length > ix && bookstarts_6.value[ix]">
-                <input type="text" v-model="bookstarts_6.value[ix][iy]" @change="inputChange"/>
+                <input type="text" v-model="bookstarts_6.value[ix][iy]" @change="inputChange" :disabled="isAdmin"/>
               </div>
             </td>
           </tr>

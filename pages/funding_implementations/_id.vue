@@ -48,7 +48,7 @@
                     <div v-if="struct.value && struct.value.length > ix && struct.value[ix]">
                       <!--<input type="text" v-model="struct.value[ix][iy]" />-->
                       <!--<el-input :disabled="true" v-model="struct.value[ix][iy]" placeholder=""></el-input>-->
-                      <input type="text" v-model="struct.value[ix][iy]" @keyup="inputChange"/>
+                      <input type="text" v-model="struct.value[ix][iy]" @keyup="inputChange" :disabled="isAdmin"/>
                     </div>
                   </td>
                   <td>{{struct.value | getSum(ix)}}</td>
@@ -86,6 +86,7 @@ export default {
       structs: [],
       chooseTab: '多元閱讀',
       vuexData: this.$store.state,
+      isAdmin: (this.$store.state.authUser.area === '中央'),
       tableData3: [
         {local: '基隆市',RegularGoor: '221333',CapitalGate: '3243242',Subtotal: '324324234'},
         {local: '台北市',RegularGoor: '221333',CapitalGate: '3243242',Subtotal: '324324234'},

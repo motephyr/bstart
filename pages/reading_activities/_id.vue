@@ -20,7 +20,7 @@
             <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in reading_activities_1.yaxio" :key="y.id">
               <div v-if="reading_activities_1.value.length > ix && reading_activities_1.value[ix]">
-                <el-input type="text" v-model="reading_activities_1.value[ix][iy]" ></el-input>
+                <el-input type="text" v-model="reading_activities_1.value[ix][iy]" :disabled="isAdmin"></el-input>
               </div>
             </td>
           </tr>
@@ -41,7 +41,7 @@
             <td width="128">{{x.value}}</td>
             <td v-for="(y, iy) in reading_activities_2.yaxio" :key="y.id">
               <div v-if="reading_activities_2.value.length > ix && reading_activities_2.value[ix]">
-                <el-input type="text" v-model="reading_activities_2.value[ix][iy]" ></el-input>
+                <el-input type="text" v-model="reading_activities_2.value[ix][iy]" :disabled="isAdmin"></el-input>
               </div>
             </td>
           </tr>
