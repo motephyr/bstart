@@ -152,7 +152,7 @@ export default {
       bookstarts_5: {},
       bookstarts_6: {},
       vuexData: this.$store.state,
-      isAdmin: (this.$store.state.place === '中央')
+      isAdmin: (this.$store.state.authUser.area === '中央')
     }
   },
   watch: {

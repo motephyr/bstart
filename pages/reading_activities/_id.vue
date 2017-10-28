@@ -49,7 +49,7 @@
         </table>
 
         <!--<nuxt-link to="/">Back to the home page</nuxt-link>-->
-        <edit :reading_activities_edit="reading_activities_edit" />
+        <edit :reading_activities_edit="reading_activities_edit" v-if="isAdmin" />
       </div>
     </div>
     <div id="footerBar">
@@ -76,7 +76,8 @@ export default {
       },
       reading_activities_2: {},
       reading_activities_edit: {},
-      vuexData: this.$store.state
+      vuexData: this.$store.state,
+      isAdmin: (this.$store.state.authUser.area === '中央')
     }
   },
   watch: {
