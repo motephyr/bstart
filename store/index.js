@@ -76,20 +76,17 @@ export const actions = {
     }
   },
   async nuxtClientInit({ commit, state }, { req }) {
-    var place = Vue.cookie.get('place') || state.place
-    if (Vue.cookie.get('place')) {
-      commit('SET_PLACE', place)
-    }
-    if (Vue.cookie.get('year')) {
-      var year = Vue.cookie.get('year') || state.year
-      commit('SET_YEAR', year)
-    }
-    var yearPlaceId = await axios.post('/api/year_places/getId', {place: place, year: year})
-    commit('SET_YEAR_PLACE_ID', yearPlaceId.data.id)
+    var place = Vue.cookie.get('place') ? Vue.cookie.get('place') : state.place
+    commit('SET_PLACE', place)
+    var year = Vue.cookie.get('year') ? Vue.cookie.get('year') : state.year
+    commit('SET_YEAR', year)
+
+    var yearPlaceId = (place !== '中央') ? (await axios.post('/api/year_places/getId', {place: place, year: year})).data.id : 0  
+    commit('SET_YEAR_PLACE_ID', yearPlaceId)
   },
   async getYearPlaceId ({ commit }, { place, year }) {
-    var yearPlaceId = await axios.post('/api/year_places/getId', {place: place, year: year})
-    commit('SET_YEAR_PLACE_ID', yearPlaceId.data.id)
+    var yearPlaceId = (place !== '中央') ? (await axios.post('/api/year_places/getId', {place: place, year: year})).data.id : 0
+    commit('SET_YEAR_PLACE_ID', yearPlaceId)
   },
   setYear ({ commit }, { year }) {
     Vue.cookie.set('year', year, 1)
